@@ -1,3 +1,6 @@
+
+
+
 export const getAllPokemon = (url)=>{
     return new Promise((resolve,reject)=>{
         fetch(url)
