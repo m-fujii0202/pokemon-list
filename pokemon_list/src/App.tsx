@@ -4,10 +4,18 @@ import Card from "./components/Card/Card";
 import { Navber } from "./components/Navber/Navber";
 import { getAllPokemon, getPokemon } from "./utils/pokemon";
 
+type PokemonType = {
+count: number;
+next: string;
+previous: string;
+results: Array<string>;
+}
+
+
 function App() {
 const initialURL="https://pokeapi.co/api/v2/pokemon";
 const [loading, setLoading] = useState(true);
-const [pokemonData, setPokemonData] = useState([])
+const [pokemonData, setPokemonData] = useState<Array<PokemonType>>([]);
 const [nextURL, setNextURL] = useState("");
 const [prevURL, setPrevURL] = useState("");
 
