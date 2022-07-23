@@ -1,8 +1,14 @@
 import React from "react";
-import "./Card.css";
 import styled from "styled-components";
 
- const Card = ({pokemon}) =>{
+type PokemonType = {
+  types:Array<string>;
+  slot:number;
+  type:{name:string,url:string}
+}
+
+ const Card = (props:any) => {
+  const { pokemon } = props
  return (
  <SCard >
   <div className="cardImg">
@@ -11,7 +17,7 @@ import styled from "styled-components";
   <ScardName>{pokemon.name}</ScardName>
   <div className="cardTypes">
    <div>タイプ</div>
-   {pokemon.types.map((type)=>{
+   {pokemon.types.map((type:PokemonType)=>{
     return (
         <div key={type.type.name}>
           <span className="typeName">{type.type.name}</span>

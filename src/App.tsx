@@ -4,26 +4,27 @@ import Card from "./components/Card/Card";
 import { Navber } from "./components/Navber/Navber";
 import { getAllPokemon, getPokemon } from "./utils/pokemon";
 
-type PokemonType = {
+export type PokemonType = {
 count: number;
 next: string;
 previous: string;
-results: Array<string>;
+results: {name:string,url:string;}
 }
+
 
 
 function App() {
 const initialURL="https://pokeapi.co/api/v2/pokemon";
-const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState<boolean>(true);
 const [pokemonData, setPokemonData] = useState<Array<PokemonType>>([]);
-const [nextURL, setNextURL] = useState("");
-const [prevURL, setPrevURL] = useState("");
+const [nextURL, setNextURL] = useState<string>("");
+const [prevURL, setPrevURL] = useState<string>("");
 
 
 useEffect(()=>{
- const fetchPokemonData = async () =>{
+ const fetchPokemonData= async () =>{
   //全てのポケモンデータを取得
-  let res = await getAllPokemon(initialURL);
+  let res:PokemonType= await getAllPokemon(initialURL);
   //各ポケモンの詳細なデータ取得
   // console.log("res");  
   // console.log(res);
@@ -36,10 +37,15 @@ useEffect(()=>{
  fetchPokemonData();
 },[]);
 
-const loadPokemon = async (data)=>{
- let _pokemonData = await Promise.all(
-  data.map((pokemon)=>{
-    // console.log(pokemon);
+
+//一匹一匹の各詳細なデータを取得
+const loadPokemon = async (data:PokemonType)=>{
+  //console.log("data");
+  // console.log(data);
+ let _pokemonData:PokemonType[] = await Promise.all(
+  data.map((pokemon:PokemonType)=>{
+    console.log("pokemon");
+    console.log(pokemon);
     let pokemonRecord = getPokemon(pokemon.url);
     return pokemonRecord;
   })
@@ -51,7 +57,7 @@ const loadPokemon = async (data)=>{
 
 const handleNextPage = async () => {
   setLoading(true);
-  let data = await getAllPokemon(nextURL);
+  let data:PokemonType= await getAllPokemon(nextURL);
   // console.log(data);
   await loadPokemon(data.results);
   setNextURL(data.next);
@@ -62,8 +68,9 @@ const handleNextPage = async () => {
 const handlePrevPage = async ()=>{
   if(!prevURL) return;
   setLoading(true);
-  let data = await getAllPokemon(prevURL);
-  console.log(data);
+  let data:PokemonType = await getAllPokemon(prevURL);
+  // console.log("data1");
+  // console.log(data);
   await loadPokemon(data.results);
   setNextURL(data.next);
   setPrevURL(data.previous);

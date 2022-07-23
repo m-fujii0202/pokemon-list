@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const Navber = ()=>{
-    return <nav>ポケモン図鑑</nav>
+    return <Snav>ポケモン図鑑</Snav>
 }
 
 const Snav = styled.div`
