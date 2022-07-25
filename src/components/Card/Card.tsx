@@ -1,60 +1,63 @@
 import React from "react";
 import styled from "styled-components";
 
+// TODO：Propsの場合には、各コンポーネントでPropsTypeを作成する
 type PokemonType = {
-  types:Array<string>;
-  slot:number;
-  type:{name:string,url:string}
-}
+  types: Array<string>;
+  slot: number;
+  type: { name: string; url: string };
+};
 
- const Card = (props:any) => {
-  const { pokemon } = props
- return (
- <SCard >
-  <div className="cardImg">
-   <img src={pokemon.sprites.front_default} alt="" />
-  </div>
-  <ScardName>{pokemon.name}</ScardName>
-  <div className="cardTypes">
-   <div>タイプ</div>
-   {pokemon.types.map((type:PokemonType)=>{
-    return (
-        <div key={type.type.name}>
-          <span className="typeName">{type.type.name}</span>
-        </div>
-    )
-   })}
-   </div>
-        <ScardInfo>
-         <div className="cardData">
+const Card = (props: any) => {
+  const { pokemon } = props;
+  return (
+    <SCard>
+      <div className="cardImg">
+        <img src={pokemon.sprites.front_default} alt="" />
+      </div>
+      <ScardName>{pokemon.name}</ScardName>
+      <div className="cardTypes">
+        <div>タイプ</div>
+        {pokemon.types.map((type: PokemonType) => {
+          return (
+            <div key={type.type.name}>
+              <span className="typeName">{type.type.name}</span>
+            </div>
+          );
+        })}
+      </div>
+      <ScardInfo>
+        <div className="cardData">
           <p className="title">重さ：{pokemon.weigth}</p>
-         </div>
-         <div className="cardData">
+        </div>
+        <div className="cardData">
           <p className="title">高さ：{pokemon.height}</p>
-         </div>
-         <div className="cardData">
-          <p className="title">アビリティ：{pokemon.abilities[0].ability.name}</p>
-         </div>
-        </ScardInfo>
- </SCard >
- )
-}
+        </div>
+        <div className="cardData">
+          <p className="title">
+            アビリティ：{pokemon.abilities[0].ability.name}
+          </p>
+        </div>
+      </ScardInfo>
+    </SCard>
+  );
+};
 
 const SCard = styled.div`
   width: 290px;
   box-shadow: 24px 26px 22px 6px #777777;
   border-radius: 10px;
   background-color: #fff;
-`
+`;
 const ScardName = styled.h3`
-  padding:0;
+  padding: 0;
   font-size: 24px;
   margin-bottom: 10px;
-  margin-top:0;
-`
+  margin-top: 0;
+`;
 
 const ScardInfo = styled.div`
   text-align: center;
-`
+`;
 
 export default Card;
