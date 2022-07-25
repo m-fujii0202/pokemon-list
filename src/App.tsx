@@ -51,8 +51,8 @@ function App() {
   // console.log(pokemonData);
 
   const handleNextPage = async () => {
-    setLoading(true);
     if (!nextURL) return;
+    setLoading(true);
     let data: PokemonPageType = await getAllPokemon(nextURL);
     // console.log(data);
     await loadPokemon(data.results);
