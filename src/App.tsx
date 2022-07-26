@@ -3,12 +3,12 @@ import "./App.css";
 import Card from "./components/Card/Card";
 import { Navber } from "./components/Navber/Navber";
 import { getAllPokemon, getPokemon } from "./utils/pokemon";
-import { PokemonPageType, PokemonNameAndUrlType } from "./types/pokemon";
+import { PokemonPageType, PokemonNameAndUrlType, DetailedPokemonType } from "./types/pokemon";
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState<boolean>(true);
-  const [pokemonData, setPokemonData] = useState<Array<PokemonPageType>>([]);
+  const [pokemonData, setPokemonData] = useState<Array<DetailedPokemonType>>([]);
   const [nextURL, setNextURL] = useState<string | null>(null);
   const [prevURL, setPrevURL] = useState<string | null>(null);
 
@@ -21,8 +21,8 @@ function App() {
     //全てのポケモンデータを取得
     let res = await getAllPokemon(initialURL);
     //各ポケモンの詳細なデータ取得
-    console.log("res");
-    console.log(res);
+    // console.log("res");
+    // console.log(res);
     loadPokemon(res.results);
     // console.log(res.results);
     setNextURL(res.next);
@@ -40,12 +40,14 @@ function App() {
         // console.log("pokemon");
         // console.log(pokemon);
         let pokemonRecord = await getPokemon(pokemon.url);
-        console.log("pokemonRecord");
-        console.log(pokemonRecord);
+        // console.log("pokemonRecord");
+        // console.log(pokemonRecord);
         return pokemonRecord;
       })
     );
     setPokemonData(_pokemonData);
+    // console.log("_pokemonData");
+    // console.log(_pokemonData);
   };
 
   // console.log(pokemonData);

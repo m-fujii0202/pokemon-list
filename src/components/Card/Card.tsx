@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { DetailedPokemonType } from "../../types/pokemon";
+
 
 // TODO：Propsの場合には、各コンポーネントでPropsTypeを作成する
-type PokemonType = {
-  types: Array<string>;
-  slot: number;
-  type: { name: string; url: string };
-};
+type PropsType = {
+  pokemon:DetailedPokemonType;
+}
 
-const Card = (props: any) => {
+const Card = (props: PropsType ) => {
   const { pokemon } = props;
+  console.log(pokemon)
   return (
     <SCard>
       <div className="cardImg">
@@ -18,7 +19,7 @@ const Card = (props: any) => {
       <ScardName>{pokemon.name}</ScardName>
       <div className="cardTypes">
         <div>タイプ</div>
-        {pokemon.types.map((type: PokemonType) => {
+        {pokemon.types.map((type) => {
           return (
             <div key={type.type.name}>
               <span className="typeName">{type.type.name}</span>
@@ -28,7 +29,7 @@ const Card = (props: any) => {
       </div>
       <ScardInfo>
         <div className="cardData">
-          <p className="title">重さ：{pokemon.weigth}</p>
+          <p className="title">重さ：{pokemon.weight}</p>
         </div>
         <div className="cardData">
           <p className="title">高さ：{pokemon.height}</p>
