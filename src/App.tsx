@@ -21,10 +21,9 @@ function App() {
     //全てのポケモンデータを取得
     let res = await getAllPokemon(initialURL);
     //各ポケモンの詳細なデータ取得
-    // console.log("res");
-    // console.log(res);
+    
     loadPokemon(res.results);
-    // console.log(res.results);
+   
     setNextURL(res.next);
     setPrevURL(res.previous); //１ページ目はnullになる
     setLoading(false);
@@ -37,26 +36,22 @@ function App() {
     // 共通化できそうなら共通化する
     let _pokemonData = await Promise.all(
       pokemonList.map(async (pokemon) => {
-        // console.log("pokemon");
-        // console.log(pokemon);
+        
         let pokemonRecord = await getPokemon(pokemon.url);
-        // console.log("pokemonRecord");
-        // console.log(pokemonRecord);
+      
         return pokemonRecord;
       })
     );
     setPokemonData(_pokemonData);
-    // console.log("_pokemonData");
-    // console.log(_pokemonData);
+   
   };
 
-  // console.log(pokemonData);
 
   const handleNextPage = async () => {
     if (!nextURL) return;
     setLoading(true);
     let data: PokemonPageType = await getAllPokemon(nextURL);
-    // console.log(data);
+   
     await loadPokemon(data.results);
     setNextURL(data.next);
     setPrevURL(data.previous);
@@ -67,8 +62,6 @@ function App() {
     if (!prevURL) return;
     setLoading(true);
     let data: PokemonPageType = await getAllPokemon(prevURL);
-    // console.log("data1");
-    // console.log(data);
     await loadPokemon(data.results);
     setNextURL(data.next);
     setPrevURL(data.previous);

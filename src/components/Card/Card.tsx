@@ -10,7 +10,6 @@ type PropsType = {
 
 const Card = (props: PropsType ) => {
   const { pokemon } = props;
-  console.log(pokemon)
   return (
     <SCard>
       <div className="cardImg">
